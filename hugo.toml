@@ -1,0 +1,8 @@
+baseURL = 'https://example.org/'
+locale = 'en-us'
+title = 'Dragonflies of Belarus'
+
+[markup]
+ [markup.goldmark]
+  [markup.goldmark.renderer]
+   unsafe = true

@@ -1,0 +1,42 @@
+{{ define "main" }}
+
+<article class="species">
+
+    <header>
+        <h1>{{ .Title }}</h1>
+
+        <p>
+            <em>{{ .Params.genus }} {{ .Params.species }}</em>
+        </p>
+
+        <table>
+            <tr>
+                <th>Suborder</th>
+                <td>{{ .Params.suborder }}</td>
+            </tr>
+            <tr>
+                <th>Family</th>
+                <td>
+                    <a href="/families/{{ lower .Params.family }}/">
+                        {{ .Params.family }}
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <th>Genus</th>
+                <td>{{ .Params.genus }}</td>
+            </tr>
+        </table>
+    </header>
+
+    {{ with .Resources.GetMatch .Params.hero }}
+    <img src="{{ .RelPermalink }}" alt="{{ $.Title }}">
+    {{ end }}
+
+    <main>
+        {{ .Content }}
+    </main>
+
+</article>
+
+{{ end }}

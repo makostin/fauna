@@ -1,0 +1,20 @@
+{{ define "main" }}
+
+<h1>{{ .Title }}</h1>
+
+{{ .Content }}
+
+<h2>Species</h2>
+
+<ul>
+    {{ range where site.RegularPages "Params.family" .Title }}
+    <li>
+        <a href="{{ .RelPermalink }}">
+            {{ .Title }}
+        </a>
+        <em>({{ .Params.genus }} {{ .Params.species }})</em>
+    </li>
+    {{ end }}
+</ul>
+
+{{ end }}

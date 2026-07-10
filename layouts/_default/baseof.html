@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{ .Title }} | {{ site.Title }}</title>
+
+    {{ with resources.Get "css/main.css" }}
+    <link rel="stylesheet" href="{{ .RelPermalink }}">
+    {{ end }}
+</head>
+
+<body>
+
+<header class="site-header">
+
+    <div class="site-title">
+        <h1>
+            <a href="{{ "/" | relURL }}">{{ site.Title }}</a>
+        </h1>
+
+        <nav class="breadcrumbs">
+
+            <a href="{{ "/" | relURL }}">Home</a>
+
+            {{ if eq .Section "families" }}
+            &gt; {{ .Title }}
+            {{ end }}
+
+            {{ if eq .Section "species" }}
+            {{ $family := .Params.family }}
+
+            &gt;
+            <a href="/families/{{ lower $family }}/">
+                {{ $family }}
+            </a>
+
+            &gt; {{ .Title }}
+            {{ end }}
+
+        </nav>
+
+    </div>
+
+    <div class="search-box">
+        <form action="/search/" method="get">
+            <input
+                    type="search"
+                    name="q"
+                    placeholder="Search species..."
+            >
+        </form>
+    </div>
+
+</header>
+
+<main class="content">
+
+    {{ block "main" . }}{{ end }}
+
+</main>
+
+</body>
+
+</html>

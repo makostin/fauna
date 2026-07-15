@@ -2,5 +2,6 @@ public/
 resources/
 .hugo_build.lock
 .DS_Store
-/public/
-/odonata.iml
+odonata.iml
+.idea/
+old/

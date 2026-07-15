@@ -1,20 +1,64 @@
 {{ define "main" }}
 
-<h1>{{ .Title }}</h1>
+<article class="family">
 
-{{ .Content }}
+    <header class="species-header">
 
-<h2>Species</h2>
+        <div class="species-text">
 
-<ul>
-    {{ range where site.RegularPages "Params.family" .Title }}
-    <li>
-        <a href="{{ .RelPermalink }}">
-            {{ .Title }}
-        </a>
-        <em>({{ .Params.genus }} {{ .Params.species }})</em>
-    </li>
-    {{ end }}
-</ul>
+            <h1>{{ .Title }}</h1>
+
+            <p class="latin">
+                <em>{{ .Params.scientific_name }}</em>
+                {{ with .Params.authority }}
+                {{ . }}
+                {{ end }}
+            </p>
+
+            <table class="taxonomy">
+
+                <tr>
+                    <th>Подотряд</th>
+                    <td>{{ .Params.suborder }}</td>
+                </tr>
+
+                <tr>
+                    <th>Семейство</th>
+                    <td>{{ .Params.family }}</td>
+                </tr>
+
+            </table>
+
+            <p class="external-links">
+
+                {{ with .Params.gbif }}
+                <a href="https://www.gbif.org/taxon/{{ . }}">GBIF</a>
+                {{ end }}
+
+                {{ with .Params.inat }}
+                · <a href="https://www.inaturalist.org/taxa/{{ . }}">iNaturalist</a>
+                {{ end }}
+
+                {{ with .Params.scientific_name }}
+                · <a href="https://ru.wikipedia.org/wiki/{{ replace . " " "_" }}">Wikipedia</a>
+                {{ end }}
+
+            </p>
+
+        </div>
+
+        <div class="species-hero">
+            {{ with .Resources.GetMatch "hero.*" }}
+            <img src="{{ .RelPermalink }}" alt="{{ $.Title }}">
+            {{ end }}
+        </div>
+
+    </header>
+
+    <div class="content">
+        {{ .Content }}
+    </div>
+
+</article>
 
 {{ end }}

@@ -2,40 +2,105 @@
 
 <article class="species">
 
-    <header>
-        <h1>{{ .Title }}</h1>
+    <header class="species-header">
 
-        <p>
-            <em>{{ .Params.genus }} {{ .Params.species }}</em>
-        </p>
+        <div class="species-text">
 
-        <table>
-            <tr>
-                <th>Suborder</th>
-                <td>{{ .Params.suborder }}</td>
-            </tr>
-            <tr>
-                <th>Family</th>
-                <td>
-                    <a href="/families/{{ lower .Params.family }}/">
-                        {{ .Params.family }}
-                    </a>
-                </td>
-            </tr>
-            <tr>
-                <th>Genus</th>
-                <td>{{ .Params.genus }}</td>
-            </tr>
-        </table>
+            <h1>{{ .Title }}</h1>
+
+            <p class="latin">
+                <em>{{ .Params.scientific_name }}</em>
+                {{ with .Params.authority }}
+                {{ . }}
+                {{ end }}
+            </p>
+
+            <table class="taxonomy">
+
+                <tr>
+                    <th>Подотряд</th>
+                    <td>{{ .Params.suborder }}</td>
+                </tr>
+
+                {{ $family := .Params.family }}
+                {{ with where site.RegularPages "Section" "families" }}
+                <tr>
+                    <th>Семейство</th>
+                    <td>
+                        {{ range where . ".Params.family" $family }}
+                        <a href="{{ .RelPermalink }}">{{ .Params.family }}</a>
+                        {{ end }}
+                    </td>
+                </tr>
+                {{ end }}
+
+                <tr>
+                    <th>Род</th>
+                    <td>{{ .Params.genus }}</td>
+                </tr>
+
+                <tr>
+                    <th>Вид</th>
+                    <td>{{ .Params.species }}</td>
+                </tr>
+
+                <tr>
+                    <th>IUCN</th>
+                    <td>
+                        <a href="https://www.iucnredlist.org/search?query={{ .Params.scientific_name | urlquery }}&searchType=species"
+                           target="_blank"
+                           rel="noopener">
+                            {{ .Params.iucn }}
+                        </a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>Красная книга</th>
+                    <td>{{ i18n (printf "redbook_%s" .Params.belarus_red_book) }}</td>
+                </tr>
+
+            </table>
+
+            <p class="external-links">
+
+                {{ with .Params.gbif }}
+                <a href="https://www.gbif.org/taxon/{{ . }}">GBIF</a>
+                {{ end }}
+
+                {{ with .Params.inat }}
+                · <a href="https://www.inaturalist.org/taxa/{{ . }}">iNaturalist</a>
+                {{ end }}
+
+                {{ with .Params.inat }}
+                · <a href="https://www.inaturalist.org/observations?place_id=7578&subview=map&taxon_id={{ . }}">Наблюдения на iNaturalist</a>
+                {{ end }}
+
+                {{ with .Params.scientific_name }}
+                · <a href="https://ru.wikipedia.org/wiki/{{ replace . " " "_" }}">Wikipedia</a>
+                {{ end }}
+            </p>
+
+        </div>
+
+        <div class="species-hero">
+
+            {{ range where .Params.images "id" "hero" }}
+
+            {{ partial "image.html" (dict
+            "page" $
+            "image" .
+            ) }}
+
+            {{ end }}
+
+        </div>
+
     </header>
 
-    {{ with .Resources.GetMatch .Params.hero }}
-    <img src="{{ .RelPermalink }}" alt="{{ $.Title }}">
-    {{ end }}
-
-    <main>
+    <div class="content">
         {{ .Content }}
-    </main>
+    </div>
 
 </article>
 

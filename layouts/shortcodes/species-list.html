@@ -1,0 +1,22 @@
+{{ $family := .Page.Params.family }}
+{{ $species := where site.RegularPages "Section" "species" }}
+
+{{ if $family }}
+{{ $species = where $species ".Params.family" $family }}
+{{ end }}
+
+<h2>Виды Беларуси</h2>
+
+<ul class="species-list">
+
+    {{ range sort $species ".Params.scientific_name" }}
+
+    <li>
+        <a href="{{ .RelPermalink }}">
+            <em>{{ .Params.scientific_name }}</em> ({{ .Title }})
+        </a>
+    </li>
+
+    {{ end }}
+
+</ul>

@@ -1,13 +1,3 @@
 {{ define "main" }}
-
-<h1>{{ .Title }}</h1>
-
-<ul>
-    {{ range (site.GetPage "section" "families").Pages }}
-    <li>
-        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-    </li>
-    {{ end }}
-</ul>
-
+{{ .Content }}
 {{ end }}

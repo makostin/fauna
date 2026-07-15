@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
     <meta charset="UTF-8">
@@ -15,27 +15,61 @@
 <header class="site-header">
 
     <div class="site-title">
+
         <h1>
             <a href="{{ "/" | relURL }}">{{ site.Title }}</a>
         </h1>
 
         <nav class="breadcrumbs">
 
-            <a href="{{ "/" | relURL }}">Home</a>
-
-            {{ if eq .Section "families" }}
-            &gt; {{ .Title }}
-            {{ end }}
+            <a href="{{ "/" | relURL }}">Главная</a>
 
             {{ if eq .Section "species" }}
-            {{ $family := .Params.family }}
 
+            {{ with .Params.suborder }}
             &gt;
-            <a href="/families/{{ lower $family }}/">
-                {{ $family }}
-            </a>
+            <a href="/suborders/{{ lower . }}/">{{ . }}</a>
+            {{ end }}
+
+            {{ with .Params.family }}
+            &gt;
+            <a href="/families/{{ lower . }}/">{{ . }}</a>
+            {{ end }}
+
+            {{ with .Params.genus }}
+            &gt;
+            <a href="/genera/{{ lower . }}/">{{ . }}</a>
+            {{ end }}
 
             &gt; {{ .Title }}
+
+            {{ else if eq .Section "genera" }}
+
+            {{ with .Params.suborder }}
+            &gt;
+            <a href="/suborders/{{ lower . }}/">{{ . }}</a>
+            {{ end }}
+
+            {{ with .Params.family }}
+            &gt;
+            <a href="/families/{{ lower . }}/">{{ . }}</a>
+            {{ end }}
+
+            &gt; {{ .Title }}
+
+            {{ else if eq .Section "families" }}
+
+            {{ with .Params.suborder }}
+            &gt;
+            <a href="/suborders/{{ lower . }}/">{{ . }}</a>
+            {{ end }}
+
+            &gt; {{ .Title }}
+
+            {{ else if eq .Section "suborders" }}
+
+            &gt; {{ .Title }}
+
             {{ end }}
 
         </nav>
@@ -47,7 +81,7 @@
             <input
                     type="search"
                     name="q"
-                    placeholder="Search species..."
+                    placeholder="Поиск..."
             >
         </form>
     </div>
@@ -55,9 +89,7 @@
 </header>
 
 <main class="content">
-
     {{ block "main" . }}{{ end }}
-
 </main>
 
 </body>

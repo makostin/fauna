@@ -1,3 +1,0 @@
----
-title: "Dragonflies of Belarus"
----

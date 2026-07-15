@@ -17,12 +17,12 @@
     <div class="site-title">
 
         <h1>
-            <a href="{{ "/" | relURL }}">{{ site.Title }}</a>
+            <a href="{{ site.Home.RelPermalink }}">{{ site.Title }}</a>
         </h1>
 
         <nav class="breadcrumbs">
 
-            <a href="{{ "/" | relURL }}">Главная</a>
+            <a href="{{ site.Home.RelPermalink }}">Главная</a>
 
             {{ if eq .Section "species" }}
 

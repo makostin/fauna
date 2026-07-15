@@ -1,4 +1,6 @@
-baseURL = "https://makostin.github.io/fauna/"
+#baseURL = "https://makostin.github.io/fauna/"
+baseURL = "https://example.org/"
+
 
 relativeURLs = false
 canonifyURLs = false

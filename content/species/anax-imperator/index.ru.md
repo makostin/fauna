@@ -1,7 +1,7 @@
 ---
 title: "Дозорщик-император"
 date: 2026-07-11
-draft: true
+draft: false
 
 suborder: "Anisoptera"
 family: "Aeshnidae"

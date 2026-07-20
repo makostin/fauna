@@ -20,10 +20,11 @@ belarus_names: ["Дазорца-імператар", "Імператар"]
 belarus_red_book: "no"
 belarus_status: ""
 
+hero:
+  file: anax-imperator-9936_orig.jpg
+  caption: "♂ Владимир Бондарь. Могилевский р-н. All Rights Reserved."
+  
 images:
-  - id: hero
-    file: anax-imperator-9936_orig.jpg
-    caption: "♂ Владимир Бондарь. Могилевский р-н. All Rights Reserved."
   - id: anax-imperator-9983_orig
     file: anax-imperator-9983_orig.jpg
     caption: "♀ Владимир Бондарь. Могилевский р-н. All Rights Reserved."

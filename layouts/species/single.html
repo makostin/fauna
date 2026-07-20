@@ -85,13 +85,8 @@
 
         <div class="species-hero">
 
-            {{ range where .Params.images "id" "hero" }}
-
-            {{ partial "image.html" (dict
-            "page" $
-            "image" .
-            ) }}
-
+            {{ with .Params.hero }}
+            {{ partial "image.html" (dict "page" $.Page "image" .) }}
             {{ end }}
 
         </div>

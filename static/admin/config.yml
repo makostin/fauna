@@ -12,10 +12,10 @@ collections:
     label: "Species"
     folder: "content/species"
     create: true
-    path: "{{slug}}/index"        # forces the page-bundle layout: <slug>/index.md
+    path: "{{scientific_name}}/index"        # forces the page-bundle layout: <slug>/index.md
     media_folder: ""              # upload images into the entry's own folder
     public_folder: ""             # …and reference them by bare filename
-    slug: "{{slug}}"
+    slug: "{{scientific_name}}"
     fields:
       - label: "Hero Image"
         name: "hero"

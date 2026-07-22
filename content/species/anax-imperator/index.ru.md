@@ -1,18 +1,10 @@
 ---
 draft: true
-scientific_name: Anax imperator
-belarus_names:
-  - Дазорца-імператар
-  - Імператар
-alias_common_names:
-  - Дозорщик-повелитель
 hero:
   file: anax-imperator-9936_orig.jpg
   caption: ♂ Владимир Бондарь. Могилевский р-н. All Rights Reserved.
-title: Дозорщик-император
+common_name: Дозорщик-император
 date: 2026-07-11
-suborder: Anisoptera
-family: Aeshnidae
 genus: Anax
 authority: Leach, 1815
 iucn: LC

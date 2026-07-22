@@ -1,19 +1,14 @@
 ---
-title: "Коромысла"
+common_name: "Коромысла"
 date: 2026-07-11
 draft: false
 
 suborder: "Anisoptera"
 family: "Aeshnidae"
-scientific_name: "Aeshnidae"
 authority: "Rambur, 1842"
-
-alias_common_names: []
 
 gbif: "9WKQT"
 inat: "51469"
-
-belarus_names: ["Каромыслы"]
 
 images:
   - id: aeshnidae1

@@ -4,65 +4,180 @@ backend:
   branch: main
   base_url: https://decap-cms-github-oauth-api.kostinmaks.workers.dev
 
-media_folder: "static/images/uploads"
-public_folder: "/images/uploads"
-
 collections:
+  # ────────────────────────────────────────────────
+  # Reusable field blocks (anchors) — not a collection
+  # ────────────────────────────────────────────────
+  - &photo_fields
+    - label: "Hero Image"
+      name: "hero"
+      widget: "object"
+      required: true
+      fields:
+        - label: "File"
+          name: "file"
+          widget: "image"
+          required: true
+          media_library:
+            config:
+              multiple: false
+        - label: "Caption"
+          name: "caption"
+          widget: "string"
+          required: false
+    - label: "Images"
+      name: "images"
+      widget: "list"
+      required: false
+      summary: "{{fields.id}} — {{fields.caption}}"
+      fields:
+        - label: "ID"
+          name: "id"
+          widget: "string"
+          hint: "Short, unique, no spaces. Used in body as {{< image THIS-ID >}}"
+        - label: "File"
+          name: "file"
+          widget: "image"
+          media_library:
+            config:
+              multiple: false
+        - label: "Caption"
+          name: "caption"
+          widget: "string"
+          required: false
+    - label: "Body"
+      name: "body"
+      widget: "markdown"
+      hint: "To insert an image from the Images list above, type: {{< image the-id >}}"
+
+  # ────────────────────────────────────────────────
+  # Suborder — top of the taxonomy, no relation
+  # ────────────────────────────────────────────────
+  - name: "suborders"
+    label: "Suborders"
+    folder: "content/suborders"
+    create: true
+    path: "{{fields.title | lower}}/index"
+    slug: "{{fields.title | lower}}"
+    media_folder: ""
+    public_folder: ""
+    fields:
+      - label: "Suborder name"
+        name: "title"
+        widget: "string"
+        required: true
+        hint: "Scientific name, e.g. Anisoptera"
+      - { label: "Common name", name: "common_name", widget: "string", required: false }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Draft", name: "draft", widget: "boolean", default: true }
+      - *photo_fields
+
+  # ────────────────────────────────────────────────
+  # Family — refers to Suborder
+  # ────────────────────────────────────────────────
+  - name: "families"
+    label: "Families"
+    folder: "content/families"
+    create: true
+    path: "{{fields.title | lower}}/index"
+    slug: "{{fields.title | lower}}"
+    media_folder: ""
+    public_folder: ""
+    fields:
+      - label: "Family name"
+        name: "title"
+        widget: "string"
+        required: true
+        hint: "Scientific name, e.g. Aeshnidae"
+      - label: "Suborder"
+        name: "suborder"
+        widget: "relation"
+        collection: "suborders"
+        search_fields: ["title"]
+        value_field: "title"
+        display_fields: ["title"]
+        required: true
+      - { label: "Common name", name: "common_name", widget: "string", required: true }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Draft", name: "draft", widget: "boolean", default: true }
+      - *photo_fields
+
+  # ────────────────────────────────────────────────
+  # Genus — refers to Family
+  # ────────────────────────────────────────────────
+  - name: "genera"
+    label: "Genera"
+    folder: "content/genera"
+    create: true
+    path: "{{fields.title | lower}}/index"
+    slug: "{{fields.title | lower}}"
+    media_folder: ""
+    public_folder: ""
+    fields:
+      - label: "Genus name"
+        name: "title"
+        widget: "string"
+        required: true
+        hint: "Scientific name, e.g. Anax"
+      - label: "Family"
+        name: "family"
+        widget: "relation"
+        collection: "families"
+        search_fields: ["title"]
+        value_field: "title"
+        display_fields: ["title"]
+        required: true
+      - { label: "Common name", name: "common_name", widget: "string", required: true }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Draft", name: "draft", widget: "boolean", default: true }
+      - *photo_fields
+
+  # ────────────────────────────────────────────────
+  # Species — refers to Genus
+  # ────────────────────────────────────────────────
   - name: "species"
     label: "Species"
     folder: "content/species"
     create: true
-    path: "{{scientific_name}}/index"        # forces the page-bundle layout: <slug>/index.md
-    media_folder: ""              # upload images into the entry's own folder
-    public_folder: ""             # …and reference them by bare filename
-    slug: "{{scientific_name}}"
+    identifier_field: "species"
+    summary: "{{fields.genus}} {{fields.species}} — {{fields.title}}"
+    path: "{{fields.genus | lower}}-{{fields.species | lower}}/index"
+    slug: "{{fields.genus | lower}}-{{fields.species | lower}}"
+    media_folder: ""
+    public_folder: ""
     fields:
-      - label: "Hero Image"
-        name: "hero"
-        widget: "object"
+      - label: "Genus"
+        name: "genus"
+        widget: "relation"
+        collection: "genera"
+        search_fields: ["title"]
+        value_field: "title"
+        display_fields: ["title"]
         required: true
-        fields:
-          - label: "File"
-            name: "file"
-            widget: "image"
-            required: true
-            media_library:
-              config:
-                multiple: false
-          - label: "Caption"
-            name: "caption"
-            widget: "string"
-            required: false
-      - { label: "Title", name: "title", widget: "string" }
+      - label: "Species epithet"
+        name: "species"
+        widget: "string"
+        required: true
+        pattern: ["^[a-z-]+$", "Lowercase only, by taxonomic convention"]
+      - { label: "Authority", name: "authority", widget: "string", required: true }
+      - { label: "Common name", name: "common_name", widget: "string", required: true }
       - { label: "Date", name: "date", widget: "datetime" }
       - { label: "Draft", name: "draft", widget: "boolean", default: true }
-      - { label: "Suborder", name: "suborder", widget: "string" }
-      - { label: "Family", name: "family", widget: "string" }
-      - { label: "Genus", name: "genus", widget: "string" }
-      - { label: "Species", name: "species", widget: "string" }
-      - { label: "Scientific name", name: "scientific_name", widget: "string" }
-      - { label: "Authority", name: "authority", widget: "string" }
-      - label: "Images"
-        name: "images"
-        widget: "list"
-        summary: "{{fields.id}} — {{fields.caption}}"
-        fields:
-          - label: "ID"
-            name: "id"
-            widget: "string"
-            hint: "Short, unique, no spaces. This is what you type in the body: {{< image THIS-ID >}}"
-          - label: "File"
-            name: "file"
-            widget: "image"
-            media_library:
-              config:
-                multiple: false
-          - label: "Caption"
-            name: "caption"
-            widget: "string"
-            required: false
+      - *photo_fields
 
-      - label: "Body"
-        name: "body"
-        widget: "markdown"
-        hint: "To insert an image from the Images list above, type: {{< image the-id >}}"
+  # ────────────────────────────────────────────────
+  # Article — simple content type, no taxonomy fields
+  # ────────────────────────────────────────────────
+  - name: "articles"
+    label: "Articles"
+    folder: "content/articles"
+    create: true
+    path: "{{slug}}/index"
+    slug: "{{slug}}"
+    media_folder: ""
+    public_folder: ""
+    fields:
+      - { label: "Title", name: "title", widget: "string", required: true }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Draft", name: "draft", widget: "boolean", default: true }
+      - *photo_fields

@@ -1,7 +1,7 @@
 ---
-title: "Anax"
+title: "Aeshna"
 authority: "Leach, 1815"
-common_name: "Emperors"
+common_name: "Darners"
 family: "Aeshnidae"
 
 date: 2026-07-22T00:00:00Z

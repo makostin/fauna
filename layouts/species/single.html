@@ -7,13 +7,11 @@
 
         <div class="species-text">
 
-            <h1>{{ .Title }}</h1>
+            <h1>{{ .Params.common_name }}</h1>
 
             <p class="latin">
-                <em>{{ .Params.title }}</em>
-                {{ with .Params.authority }}
-                {{ . }}
-                {{ end }}
+                <em>{{ .Params.genus }} {{ .Params.species }}</em>
+                {{ .Params.authority }}
             </p>
 
             <table class="taxonomy">

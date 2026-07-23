@@ -1,3 +1,17 @@
 {{ define "main" }}
-{{ .Content }}
+{{ $home := .Site.GetPage "/articles/homepage" }}
+
+{{ with $home }}
+<article class="homepage">
+    <h1>{{ .Params.title }}</h1>
+
+    {{ with .Params.hero }}
+    {{ partial "image.html" (dict "page" $home "image" .) }}
+    {{ end }}
+
+    {{ .Content }}
+</article>
+{{ else }}
+{{ warnf "Homepage article not found at /articles/homepage — check the slug matches" }}
+{{ end }}
 {{ end }}

@@ -365,6 +365,9 @@ collections:
   # ────────────────────────────────────────────────
   - name: "homepage"
     label: "Homepage"
+    i18n:
+      structure: single_file
+      locales: [ru]
     files:
       - label: "Main page"
         name: "main"

@@ -12,6 +12,4 @@ images:
 ---
 Текст статьи...
 
-
-
-{{< image babka-rynd>}}
+{{< image babka-rynd >}}

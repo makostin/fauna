@@ -362,11 +362,11 @@ collections:
   # ────────────────────────────────────────────────
   - name: "homepage"
     label: "Homepage"
+    i18n: true
     files:
       - label: "Main page"
         name: "main"
         file: "content/_index.md"
-        i18n: true
         media_folder: ""
         public_folder: ""
         fields:

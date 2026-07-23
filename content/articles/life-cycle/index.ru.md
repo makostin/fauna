@@ -1,16 +1,17 @@
 ---
-title: "Жизненный цикл стрекоз"
-date: 2026-07-22T00:00:00Z
+title: Жизненный цикл стрекоз
+date: 2026-07-22T00:00:00.000Z
 draft: false
-
 hero:
-  file: "hero.png"
-  caption: "hero png sample"
-
+  file: hero.png
+  caption: hero png sample
 images:
-  - id: aeshnidae1
-    file: aeshnidae-1_orig.jpg
-    caption: "..."
+  - file: somatochlora-arctica-vr-elnya_orig.jpg
+    id: babka-rynd
+    caption: Бабка Арктіческая, Віктор Рындевіч
 ---
-
 Текст статьи...
+
+
+
+{{< image babka-rynd>}}

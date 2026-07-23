@@ -22,7 +22,7 @@ collections:
     create: true
 #    i18n: true
     path: "{{slug}}/index"
-    slug: "{{fields.title | lower}}"
+#    slug: "{{fields.title | lower}}"
     media_folder: ""
     public_folder: ""
     fields:

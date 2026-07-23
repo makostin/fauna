@@ -1,16 +1,17 @@
 ---
-title: "Anisoptera"
-authority: "Selys, 1854"
-common_name: "Dragonflies"
-date: 2026-07-22T00:00:00Z
+title: Anisoptera
+authority: Selys, 1854
+common_name: Разнокрылые стрекозы
+date: 2026-07-22T00:00:00.000Z
 draft: false
 hero:
-  file: "hero.png"
-  caption: "hero png sample"
+  file: hero.png
+  caption: hero png sample
 images:
   - id: aeshnidae1
     file: aeshnidae-1_orig.jpg
-    caption: "Göran Liljeberg & Hallvard Elven. Naturhistorisk museum, Universitetet i Oslo.CC BY-SA 3.0."
+    caption: Göran Liljeberg & Hallvard Elven. Naturhistorisk museum, Universitetet
+      i Oslo.CC BY-SA 3.0.
 ---
 
 Крупные, бросающиеся в глаза, быстро летающие стрекозы с длинным тонким брюшком. Глаза большие, соприкасаются на некотором отрезке. Лопасти нижней губы примерно одинаковых размеров, без надрезов. Брюшко с боковыми ребрышками. Яйцеклад у самок состоит из 4 стилетов и не длиннее конца брюшка, генитальная заслоночка есть. Яйцеклад находится ниже конца брюшка, как и у равнокрылых стрекоз, короткий и снабжен зазубренными створками для прокалывания растительности для эндофитной откладки яиц. Передние и задние крылья различаются по форме.

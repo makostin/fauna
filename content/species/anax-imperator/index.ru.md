@@ -1,5 +1,6 @@
 ---
 genus: Anax
+species: imperator
 authority: Leach, 1815
 common_name: Дозорщик-император
 date: 2026-07-11
@@ -45,7 +46,6 @@ images:
     caption: test image caption
 gbif: DJX8
 belarus_status: ""
-species: imperator
 hero:
   file: anax-imperator-9936_orig.jpg
   caption: ♂ Владимир Бондарь. Могилевский р-н. All Rights Reserved.

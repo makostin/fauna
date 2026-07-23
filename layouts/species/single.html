@@ -1,4 +1,5 @@
 {{ define "main" }}
+{{ $chain := partial "taxonomy-chain.html" (dict "page" .) }}
 
 <article class="species">
 
@@ -9,7 +10,7 @@
             <h1>{{ .Title }}</h1>
 
             <p class="latin">
-                <em>{{ .Params.scientific_name }}</em>
+                <em>{{ .Params.title }}</em>
                 {{ with .Params.authority }}
                 {{ . }}
                 {{ end }}
@@ -17,31 +18,32 @@
 
             <table class="taxonomy">
 
+                {{ with $chain.suborder }}
                 <tr>
                     <th>Подотряд</th>
-                    <td>{{ .Params.suborder }}</td>
+                    <td>{{ .Params.title }}</td>
                 </tr>
+                {{ end }}
 
-                {{ $family := .Params.family }}
-                {{ with where site.RegularPages "Section" "families" }}
+                {{ with $chain.family }}
                 <tr>
                     <th>Семейство</th>
                     <td>
-                        {{ range where . ".Params.family" $family }}
                         <a href="{{ .RelPermalink }}">{{ .Params.family }}</a>
-                        {{ end }}
                     </td>
                 </tr>
                 {{ end }}
 
+                {{ with $chain.genus }}
                 <tr>
                     <th>Род</th>
                     <td>{{ .Params.genus }}</td>
                 </tr>
+                {{ end }}
 
                 <tr>
                     <th>Вид</th>
-                    <td>{{ .Params.species }}</td>
+                    <td>{{ .Params.title }}</td>
                 </tr>
 
                 <tr>
@@ -76,7 +78,7 @@
                 · <a href="https://www.inaturalist.org/observations?place_id=7578&subview=map&taxon_id={{ . }}">Наблюдения на iNaturalist</a>
                 {{ end }}
 
-                {{ with .Params.scientific_name }}
+                {{ with .Params.title }}
                 · <a href="https://ru.wikipedia.org/wiki/{{ replace . " " "_" }}">Wikipedia</a>
                 {{ end }}
             </p>

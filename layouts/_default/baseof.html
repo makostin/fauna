@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="{{ site.Language.LanguageCode }}">
 
 <head>
     <meta charset="UTF-8">
-    <title>{{ .Title }} | {{ site.Title }}</title>
+
+    <title>
+        {{ .Title }} | {{ site.Title }}
+    </title>
 
     {{ with resources.Get "css/main.css" }}
     <link rel="stylesheet" href="{{ .RelPermalink }}">
@@ -14,82 +17,19 @@
 
 <header class="site-header">
 
-    <div class="site-title">
-
-        <h1>
-            <a href="{{ site.Home.RelPermalink }}">{{ site.Title }}</a>
-        </h1>
-
-        <nav class="breadcrumbs">
-
-            <a href="{{ site.Home.RelPermalink }}">Главная</a>
-
-            {{ if eq .Section "species" }}
-
-            {{ with .Params.suborder }}
-            &gt;
-            <a href="/suborders/{{ lower . }}/">{{ . }}</a>
-            {{ end }}
-
-            {{ with .Params.family }}
-            &gt;
-            <a href="/families/{{ lower . }}/">{{ . }}</a>
-            {{ end }}
-
-            {{ with .Params.genus }}
-            &gt;
-            <a href="/genera/{{ lower . }}/">{{ . }}</a>
-            {{ end }}
-
-            &gt; {{ .Title }}
-
-            {{ else if eq .Section "genera" }}
-
-            {{ with .Params.suborder }}
-            &gt;
-            <a href="/suborders/{{ lower . }}/">{{ . }}</a>
-            {{ end }}
-
-            {{ with .Params.family }}
-            &gt;
-            <a href="/families/{{ lower . }}/">{{ . }}</a>
-            {{ end }}
-
-            &gt; {{ .Title }}
-
-            {{ else if eq .Section "families" }}
-
-            {{ with .Params.suborder }}
-            &gt;
-            <a href="/suborders/{{ lower . }}/">{{ . }}</a>
-            {{ end }}
-
-            &gt; {{ .Title }}
-
-            {{ else if eq .Section "suborders" }}
-
-            &gt; {{ .Title }}
-
-            {{ end }}
-
-        </nav>
-
-    </div>
-
-    <div class="search-box">
-        <form action="/search/" method="get">
-            <input
-                    type="search"
-                    name="q"
-                    placeholder="Поиск..."
-            >
-        </form>
-    </div>
+    <h1 class="site-title">
+        <a href="{{ site.Home.RelPermalink }}">
+            {{ site.Title }}
+        </a>
+    </h1>
 
 </header>
 
 <main class="content">
-    {{ block "main" . }}{{ end }}
+
+    {{ block "main" . }}
+    {{ end }}
+
 </main>
 
 </body>

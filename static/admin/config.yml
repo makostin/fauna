@@ -7,59 +7,20 @@ backend:
 media_folder: "static/images/uploads"
 public_folder: "/images/uploads"
 
+i18n:
+  structure: multiple_files
+  locales: [ru]
+  default_locale: ru
+
 collections:
   # ────────────────────────────────────────────────
-  # Reusable field blocks (anchors) — not a collection
-  # ────────────────────────────────────────────────
-  - &photo_fields
-    - label: "Hero Image"
-      name: "hero"
-      widget: "object"
-      required: true
-      fields:
-        - label: "File"
-          name: "file"
-          widget: "image"
-          required: true
-          media_library:
-            config:
-              multiple: false
-        - label: "Caption"
-          name: "caption"
-          widget: "string"
-          required: false
-    - label: "Images"
-      name: "images"
-      widget: "list"
-      required: false
-      summary: "{{fields.id}} — {{fields.caption}}"
-      fields:
-        - label: "ID"
-          name: "id"
-          widget: "string"
-          hint: "Short, unique, no spaces. Used in body as {{< image THIS-ID >}}"
-        - label: "File"
-          name: "file"
-          widget: "image"
-          media_library:
-            config:
-              multiple: false
-        - label: "Caption"
-          name: "caption"
-          widget: "string"
-          required: false
-    - label: "Body"
-      name: "body"
-      widget: "markdown"
-      hint: "To insert an image from the Images list above, type: {{< image the-id >}}"
-
-  # ────────────────────────────────────────────────
-  # Suborder — top of the taxonomy, no relation
+  # Suborder
   # ────────────────────────────────────────────────
   - name: "suborders"
     label: "Suborders"
     folder: "content/suborders"
     create: true
+    i18n: true
     path: "{{fields.title | lower}}/index"
     slug: "{{fields.title | lower}}"
     media_folder: ""
@@ -69,12 +30,58 @@ collections:
         name: "title"
         widget: "string"
         required: true
+        i18n: duplicate
         hint: "Scientific name, e.g. Anisoptera"
-      - { label: "Authority", name: "authority", widget: "string", required: true }
-      - { label: "Common name", name: "common_name", widget: "string", required: false }
-      - { label: "Date", name: "date", widget: "datetime" }
-      - { label: "Draft", name: "draft", widget: "boolean", default: true }
-      - *photo_fields
+      - label: "Authority"
+        name: "authority"
+        widget: "string"
+        required: true
+        i18n: duplicate
+      - label: "Common name"
+        name: "common_name"
+        widget: "string"
+        required: true
+        i18n: true
+      - { label: "Date", name: "date", widget: "datetime", i18n: duplicate }
+      - { label: "Draft", name: "draft", widget: "boolean", default: true, i18n: duplicate }
+      - label: "Hero Image"
+        name: "hero"
+        widget: "object"
+        required: true
+        i18n: true
+        fields:
+          - label: "File"
+            name: "file"
+            widget: "image"
+            required: true
+            i18n: duplicate
+            media_library:
+              config:
+                multiple: false
+          - label: "Caption"
+            name: "caption"
+            widget: "string"
+            required: false
+            i18n: true
+      - label: "Images"
+        name: "images"
+        widget: "list"
+        required: false
+        summary: "{{fields.id}} — {{fields.caption}}"
+        fields:
+          - { label: "ID", name: "id", widget: "string", hint: "Used in body as {{< image THIS-ID >}}" }
+          - label: "File"
+            name: "file"
+            widget: "image"
+            media_library:
+              config:
+                multiple: false
+          - { label: "Caption", name: "caption", widget: "string", required: false }
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+        i18n: true
+        hint: "To insert an image from the Images list above, type: {{< image the-id >}}"
 
   # ────────────────────────────────────────────────
   # Family — refers to Suborder
@@ -83,6 +90,7 @@ collections:
     label: "Families"
     folder: "content/families"
     create: true
+    i18n: true
     path: "{{fields.title | lower}}/index"
     slug: "{{fields.title | lower}}"
     media_folder: ""
@@ -92,7 +100,18 @@ collections:
         name: "title"
         widget: "string"
         required: true
+        i18n: duplicate
         hint: "Scientific name, e.g. Aeshnidae"
+      - label: "Authority"
+        name: "authority"
+        widget: "string"
+        required: true
+        i18n: duplicate
+      - label: "Common name"
+        name: "common_name"
+        widget: "string"
+        required: true
+        i18n: true
       - label: "Suborder"
         name: "suborder"
         widget: "relation"
@@ -101,11 +120,43 @@ collections:
         value_field: "title"
         display_fields: ["title"]
         required: true
-      - { label: "Authority", name: "authority", widget: "string", required: true }
-      - { label: "Common name", name: "common_name", widget: "string", required: true }
-      - { label: "Date", name: "date", widget: "datetime" }
-      - { label: "Draft", name: "draft", widget: "boolean", default: true }
-      - *photo_fields
+        i18n: duplicate
+      - { label: "Date", name: "date", widget: "datetime", i18n: duplicate }
+      - { label: "Draft", name: "draft", widget: "boolean", default: true, i18n: duplicate }
+      - label: "Hero Image"
+        name: "hero"
+        widget: "object"
+        required: true
+        i18n: true
+        fields:
+          - label: "File"
+            name: "file"
+            widget: "image"
+            required: true
+            i18n: duplicate
+            media_library:
+              config:
+                multiple: false
+          - { label: "Caption", name: "caption", widget: "string", required: false, i18n: true }
+      - label: "Images"
+        name: "images"
+        widget: "list"
+        required: false
+        summary: "{{fields.id}} — {{fields.caption}}"
+        fields:
+          - { label: "ID", name: "id", widget: "string", hint: "Used in body as {{< image THIS-ID >}}" }
+          - label: "File"
+            name: "file"
+            widget: "image"
+            media_library:
+              config:
+                multiple: false
+          - { label: "Caption", name: "caption", widget: "string", required: false }
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+        i18n: true
+        hint: "To insert an image from the Images list above, type: {{< image the-id >}}"
 
   # ────────────────────────────────────────────────
   # Genus — refers to Family
@@ -114,6 +165,7 @@ collections:
     label: "Genera"
     folder: "content/genera"
     create: true
+    i18n: true
     path: "{{fields.title | lower}}/index"
     slug: "{{fields.title | lower}}"
     media_folder: ""
@@ -123,7 +175,18 @@ collections:
         name: "title"
         widget: "string"
         required: true
+        i18n: duplicate
         hint: "Scientific name, e.g. Anax"
+      - label: "Authority"
+        name: "authority"
+        widget: "string"
+        required: true
+        i18n: duplicate
+      - label: "Common name"
+        name: "common_name"
+        widget: "string"
+        required: true
+        i18n: true
       - label: "Family"
         name: "family"
         widget: "relation"
@@ -132,11 +195,43 @@ collections:
         value_field: "title"
         display_fields: ["title"]
         required: true
-      - { label: "Authority", name: "authority", widget: "string", required: true }
-      - { label: "Common name", name: "common_name", widget: "string", required: true }
-      - { label: "Date", name: "date", widget: "datetime" }
-      - { label: "Draft", name: "draft", widget: "boolean", default: true }
-      - *photo_fields
+        i18n: duplicate
+      - { label: "Date", name: "date", widget: "datetime", i18n: duplicate }
+      - { label: "Draft", name: "draft", widget: "boolean", default: true, i18n: duplicate }
+      - label: "Hero Image"
+        name: "hero"
+        widget: "object"
+        required: true
+        i18n: true
+        fields:
+          - label: "File"
+            name: "file"
+            widget: "image"
+            required: true
+            i18n: duplicate
+            media_library:
+              config:
+                multiple: false
+          - { label: "Caption", name: "caption", widget: "string", required: false, i18n: true }
+      - label: "Images"
+        name: "images"
+        widget: "list"
+        required: false
+        summary: "{{fields.id}} — {{fields.caption}}"
+        fields:
+          - { label: "ID", name: "id", widget: "string", hint: "Used in body as {{< image THIS-ID >}}" }
+          - label: "File"
+            name: "file"
+            widget: "image"
+            media_library:
+              config:
+                multiple: false
+          - { label: "Caption", name: "caption", widget: "string", required: false }
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+        i18n: true
+        hint: "To insert an image from the Images list above, type: {{< image the-id >}}"
 
   # ────────────────────────────────────────────────
   # Species — refers to Genus
@@ -145,8 +240,9 @@ collections:
     label: "Species"
     folder: "content/species"
     create: true
+    i18n: true
     identifier_field: "species"
-    summary: "{{fields.genus}} {{fields.species}} — {{fields.title}}"
+    summary: "{{fields.genus}} {{fields.species}} — {{fields.common_name}}"
     path: "{{fields.genus | lower}}-{{fields.species | lower}}/index"
     slug: "{{fields.genus | lower}}-{{fields.species | lower}}"
     media_folder: ""
@@ -160,30 +256,154 @@ collections:
         value_field: "title"
         display_fields: ["title"]
         required: true
+        i18n: duplicate
       - label: "Species epithet"
         name: "species"
         widget: "string"
         required: true
+        i18n: duplicate
         pattern: ["^[a-z-]+$", "Lowercase only, by taxonomic convention"]
-      - { label: "Authority", name: "authority", widget: "string", required: true }
-      - { label: "Common name", name: "common_name", widget: "string", required: true }
-      - { label: "Date", name: "date", widget: "datetime" }
-      - { label: "Draft", name: "draft", widget: "boolean", default: true }
-      - *photo_fields
+      - label: "Authority"
+        name: "authority"
+        widget: "string"
+        required: true
+        i18n: duplicate
+      - label: "Common name"
+        name: "common_name"
+        widget: "string"
+        required: true
+        i18n: true
+      - { label: "Date", name: "date", widget: "datetime", i18n: duplicate }
+      - { label: "Draft", name: "draft", widget: "boolean", default: true, i18n: duplicate }
+      - label: "Hero Image"
+        name: "hero"
+        widget: "object"
+        required: true
+        i18n: true
+        fields:
+          - label: "File"
+            name: "file"
+            widget: "image"
+            required: true
+            i18n: duplicate
+            media_library:
+              config:
+                multiple: false
+          - { label: "Caption", name: "caption", widget: "string", required: false, i18n: true }
+      - label: "Images"
+        name: "images"
+        widget: "list"
+        required: false
+        summary: "{{fields.id}} — {{fields.caption}}"
+        fields:
+          - { label: "ID", name: "id", widget: "string", hint: "Used in body as {{< image THIS-ID >}}" }
+          - label: "File"
+            name: "file"
+            widget: "image"
+            media_library:
+              config:
+                multiple: false
+          - { label: "Caption", name: "caption", widget: "string", required: false }
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+        i18n: true
+        hint: "To insert an image from the Images list above, type: {{< image the-id >}}"
 
   # ────────────────────────────────────────────────
-  # Article — simple content type, no taxonomy fields
+  # Article — simple content type
   # ────────────────────────────────────────────────
   - name: "articles"
     label: "Articles"
     folder: "content/articles"
     create: true
+    i18n: true
     path: "{{slug}}/index"
     slug: "{{slug}}"
     media_folder: ""
     public_folder: ""
     fields:
-      - { label: "Title", name: "title", widget: "string", required: true }
-      - { label: "Date", name: "date", widget: "datetime" }
-      - { label: "Draft", name: "draft", widget: "boolean", default: true }
-      - *photo_fields
+      - { label: "Title", name: "title", widget: "string", required: true, i18n: true }
+      - { label: "Date", name: "date", widget: "datetime", i18n: duplicate }
+      - { label: "Draft", name: "draft", widget: "boolean", default: true, i18n: duplicate }
+      - label: "Hero Image"
+        name: "hero"
+        widget: "object"
+        required: true
+        i18n: true
+        fields:
+          - label: "File"
+            name: "file"
+            widget: "image"
+            required: true
+            i18n: duplicate
+            media_library:
+              config:
+                multiple: false
+          - { label: "Caption", name: "caption", widget: "string", required: false, i18n: true }
+      - label: "Images"
+        name: "images"
+        widget: "list"
+        required: false
+        summary: "{{fields.id}} — {{fields.caption}}"
+        fields:
+          - { label: "ID", name: "id", widget: "string", hint: "Used in body as {{< image THIS-ID >}}" }
+          - label: "File"
+            name: "file"
+            widget: "image"
+            media_library:
+              config:
+                multiple: false
+          - { label: "Caption", name: "caption", widget: "string", required: false }
+      - label: "Body"
+        name: "body"
+        widget: "markdown"
+        i18n: true
+        hint: "To insert an image from the Images list above, type: {{< image the-id >}}"
+  # ────────────────────────────────────────────────
+  # main page
+  # ────────────────────────────────────────────────
+  - name: "homepage"
+    label: "Homepage"
+    files:
+      - label: "Main page"
+        name: "main"
+        file: "content/_index.md"
+        fields:
+          - { label: "Title", name: "title", widget: "string", required: true, i18n: true }
+          - { label: "Date", name: "date", widget: "datetime", i18n: duplicate }
+          - { label: "Draft", name: "draft", widget: "boolean", default: true, i18n: duplicate }
+          - label: "Hero Image"
+            name: "hero"
+            widget: "object"
+            required: true
+            i18n: true
+            fields:
+              - label: "File"
+                name: "file"
+                widget: "image"
+                required: true
+                i18n: duplicate
+                media_library:
+                  config:
+                    multiple: false
+              - { label: "Caption", name: "caption", widget: "string", required: false, i18n: true }
+          - label: "Images"
+            name: "images"
+            widget: "list"
+            required: false
+            summary: "{{fields.id}} — {{fields.caption}}"
+            fields:
+              - { label: "ID", name: "id", widget: "string", hint: "Used in body as {{< image THIS-ID >}}" }
+              - label: "File"
+                name: "file"
+                widget: "image"
+                media_library:
+                  config:
+                    multiple: false
+              - { label: "Caption", name: "caption", widget: "string", required: false }
+          - label: "Body"
+            name: "body"
+            widget: "markdown"
+            i18n: true
+            hint: "To insert an image from the Images list above, type: {{< image the-id >}}"

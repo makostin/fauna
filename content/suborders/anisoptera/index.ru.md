@@ -1,20 +1,12 @@
 ---
-title: "Коромысла"
-date: 2026-07-11
+title: "Anisoptera"
+authority: "Selys, 1854"
+common_name: "Dragonflies"
+date: 2026-07-22T00:00:00Z
 draft: false
-
-suborder: "Anisoptera"
-family: "Aeshnidae"
-scientific_name: "Aeshnidae"
-authority: "Rambur, 1842"
-
-alias_common_names: []
-
-gbif: "9WKQT"
-inat: "51469"
-
-belarus_names: ["Каромыслы"]
-
+hero:
+  file: "hero.png"
+  caption: "hero png sample"
 images:
   - id: aeshnidae1
     file: aeshnidae-1_orig.jpg

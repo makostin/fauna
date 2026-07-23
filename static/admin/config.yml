@@ -21,8 +21,8 @@ collections:
     folder: "content/suborders"
     create: true
     i18n: true
-    path: "{{fields.title | lower}}/index"
-    slug: "{{fields.title | lower}}"
+    path: "{{slug}}/index"
+#    slug: "{{fields.title | lower}}"
     media_folder: ""
     public_folder: ""
     fields:

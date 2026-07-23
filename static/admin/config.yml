@@ -42,8 +42,8 @@ collections:
         widget: "string"
         required: true
 #        i18n: true
-      - { label: "Date", name: "date", widget: "datetime", i18n: duplicate }
-      - { label: "Draft", name: "draft", widget: "boolean", default: true, i18n: duplicate }
+#      - { label: "Date", name: "date", widget: "datetime", i18n: duplicate }
+#      - { label: "Draft", name: "draft", widget: "boolean", default: true, i18n: duplicate }
 #      - label: "Hero Image"
 #        name: "hero"
 #        widget: "object"

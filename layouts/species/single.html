@@ -32,16 +32,14 @@
                 </tr>
                 {{ end }}
 
-                {{ with $chain.genus }}
                 <tr>
                     <th>Род</th>
                     <td>{{ .Params.genus }}</td>
                 </tr>
-                {{ end }}
 
                 <tr>
                     <th>Вид</th>
-                    <td>{{ .Params.title }}</td>
+                    <td>{{ .Params.species }}</td>
                 </tr>
 
                 <tr>
@@ -76,9 +74,7 @@
                 · <a href="https://www.inaturalist.org/observations?place_id=7578&subview=map&taxon_id={{ . }}">Наблюдения на iNaturalist</a>
                 {{ end }}
 
-                {{ with .Params.title }}
-                · <a href="https://ru.wikipedia.org/wiki/{{ replace . " " "_" }}">Wikipedia</a>
-                {{ end }}
+                · <a href="https://ru.wikipedia.org/wiki/{{ .Params.genus }}%20{{ .Params.species }}">Wikipedia</a>
             </p>
 
         </div>

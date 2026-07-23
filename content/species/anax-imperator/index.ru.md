@@ -1,12 +1,9 @@
 ---
-draft: true
-hero:
-  file: anax-imperator-9936_orig.jpg
-  caption: ♂ Владимир Бондарь. Могилевский р-н. All Rights Reserved.
-common_name: Дозорщик-император
-date: 2026-07-11
 genus: Anax
 authority: Leach, 1815
+common_name: Дозорщик-император
+date: 2026-07-11
+draft: true
 iucn: LC
 inat: "94043"
 images:
@@ -49,6 +46,9 @@ images:
 gbif: DJX8
 belarus_status: ""
 species: imperator
+hero:
+  file: anax-imperator-9936_orig.jpg
+  caption: ♂ Владимир Бондарь. Могилевский р-н. All Rights Reserved.
 belarus_red_book: no
 ---
 # Определение
@@ -60,8 +60,6 @@ belarus_red_book: no
 Длина 66-84 мм, брюшко 49-61 мм, заднее крыло 45-51 мм.
 
 {{<image anax-imperator-9983_orig>}}
-
-# Распространение
 
 Лёт: с середины мая по начало сентября, с пиком в июне-июле, заметным снижением численности с начала августа и единичными особями в сентябре. Для других регионов указывается: середина июня - октябрь.
 Немногочисленный вид, однако встречается по всей территории Беларуси.
